@@ -467,19 +467,28 @@
                 </div>
             </div>
         </div>
-        <div class="card skill-card">
-                    <div class="skill-icon">📊</div>
-                    <div class="skill-info">
-                        <div class="skill-name">My Web Zone</div>
-                        <div class="skill-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" data-width="40" style="width: 0%"></div>
-                            </div>
-                            <span class="skill-level">Learning</span>
-                        </div>
-                    </div>
-                </div>
-                
+         <!-- The clickable box -->
+    <div class="card">
+      <h2>MY TOONSITE</h2>
+
+      <!-- Programs button -->
+      <button id="programsBtn" class="programs-btn" aria-expanded="false">
+        Open Programs
+      </button>
+
+      <!-- Hidden list of program files (will toggle) -->
+      <ul id="programList" class="program-list" aria-hidden="true">
+        <li><a href="index2.html" target="_self">Program 1 — The Anime Information</a></li>
+        <li><a href="number-generator.html" target="_self">Program 2 — Random Number-generator</a></li>
+<!--<li><a href="programs/program3.html" target="_self">Program 3 — Gallery</a></li>-->
+      </ul>
+    </div>
+
+    <p class="hint">Click a program to open it in the same tab.</p>
+  </main>
+
+
+
 
     </section>
 
@@ -519,4 +528,3 @@
 </body>
 
 </html>
-
