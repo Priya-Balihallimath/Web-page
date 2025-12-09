@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Doraemon Animation</title>
+
+    <style>
+      body {
+        margin: 0;
+        background: #c9ebff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        font-family: sans-serif;
+      }
+
+      .doraemon {
+        width: 180px;
+        height: 220px;
+        position: relative;
+        animation: move 3s infinite alternate ease-in-out;
+      }
+
+      .face {
+        width: 150px;
+        height: 150px;
+        background: #1e90ff;
+        border-radius: 50%;
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        border: 4px solid black;
+      }
+
+      .white {
+        width: 120px;
+        height: 110px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 45px;
+        left: 30px;
+      }
+
+      .eye {
+        width: 32px;
+        height: 40px;
+        background: white;
+        border-radius: 50%;
+        border: 2px solid black;
+        position: absolute;
+        top: 25px;
+      }
+      .eye.left {
+        left: 45px;
+      }
+      .eye.right {
+        left: 80px;
+      }
+
+      .pupil {
+        width: 10px;
+        height: 15px;
+        background: black;
+        border-radius: 50%;
+        position: absolute;
+        top: 15px;
+        left: 11px;
+        animation: eyeMove 1.5s infinite alternate;
+      }
+
+      .nose {
+        width: 22px;
+        height: 22px;
+        background: red;
+        border-radius: 50%;
+        border: 2px solid black;
+        position: absolute;
+        top: 55px;
+        left: 70px;
+      }
+
+      .bell {
+        width: 35px;
+        height: 35px;
+        background: yellow;
+        border-radius: 50%;
+        border: 3px solid black;
+        position: absolute;
+        bottom: -10px;
+        left: 68px;
+      }
+
+      @keyframes move {
+        0% {
+          transform: translateX(-40px);
+        }
+        100% {
+          transform: translateX(40px);
+        }
+      }
+
+      @keyframes eyeMove {
+        0% {
+          transform: translateX(-3px);
+        }
+        100% {
+          transform: translateX(3px);
+        }
+      }
+
+      .controls {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        background: #ffd700;
+        border: none;
+        border-radius: 20px;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="doraemon">
+      <div class="face"></div>
+      <div class="white"></div>
+
+      <div class="eye left"><div class="pupil"></div></div>
+      <div class="eye right"><div class="pupil"></div></div>
+
+      <div class="nose"></div>
+      <div class="bell"></div>
+    </div>
+
+    <div class="controls">
+      <button onclick="playMusic()">▶ Play</button>
+      <button onclick="pauseMusic()">⏸ Pause</button>
+    </div>
+
+    <audio id="doremon" loop>
+      <source src="doremon.mp3" type="audio/mp3" />
+    </audio>
+
+    <script>
+      function playMusic() {
+        document.getElementById("doremon").play();
+      }
+      function pauseMusic() {
+        document.getElementById("doremon").pause();
+      }
+    </script>
+  </body>
+</html>
