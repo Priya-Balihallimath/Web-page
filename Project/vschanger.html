@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Inspiration</title>
+    <style>
+      /* CSS: Styling the look and feel */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #74ebd5 0%, #acb6e5 100%);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+      }
+      .quote-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        text-align: center;
+      }
+      #quote-text {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 1rem;
+        font-style: italic;
+      }
+      #quote-author {
+        font-weight: bold;
+        color: #555;
+        display: block;
+        margin-bottom: 2rem;
+      }
+      button {
+        background-color: #4a90e2;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      button:hover {
+        background-color: #357abd;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="quote-container">
+      <div id="quote-text">"Loading inspiration..."</div>
+      <div id="quote-author"></div>
+      <button onclick="generateQuote()">New Quote</button>
+    </div>
+
+    <script>
+      // JavaScript: Logic to change quotes
+      const quotes = [
+        {
+          text: "The only way to do great work is to love what you do.",
+          author: "Steve Jobs",
+        },
+        {
+          text: "Innovation distinguishes between a leader and a follower.",
+          author: "Steve Jobs",
+        },
+        {
+          text: "The future belongs to those who believe in the beauty of their dreams.",
+          author: "Eleanor Roosevelt",
+        },
+        {
+          text: "It does not matter how slowly you go as long as you do not stop.",
+          author: "Confucius",
+        },
+        {
+          text: "Everything you've ever wanted is on the other side of fear.",
+          author: "George Addair",
+        },
+        {
+          text: "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+          author: "Winston Churchill",
+        },
+      ];
+
+      function generateQuote() {
+        // Pick a random index from the array
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        const selectedQuote = quotes[randomIndex];
+
+        // Update the HTML content
+        document.getElementById(
+          "quote-text"
+        ).innerText = `"${selectedQuote.text}"`;
+        document.getElementById(
+          "quote-author"
+        ).innerText = `- ${selectedQuote.author}`;
+      }
+
+      // Run the function once immediately when the page loads
+      window.onload = generateQuote;
+    </script>
+  </body>
+</html>
