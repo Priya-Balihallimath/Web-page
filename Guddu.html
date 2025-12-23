@@ -160,11 +160,15 @@
         const carousel = document.getElementById("carousel");
         const inner = document.getElementById("inner");
         const music = document.getElementById("bgMusic");
+        carousel.style.display = "none";
 
         music.volume = 0.4;
 
-        carousel.onclick = () => {
-          carousel.classList.add("hide");
+        intro.onclick = () => {
+          intro.style.display = "none";
+          carousel.style.display = "block";
+
+          // intro.classList.add("hide");
           music.play(); // allowed now
 
           setTimeout(() => carousel.classList.add("show"), 600);
@@ -179,7 +183,7 @@
     <audio id="bgMusic" loop>
       <source src="./Swing-Machine-chosic.com_.mp3" />
     </audio>
-    <div class="intro" id="carousel">
+    <div class="intro" id="intro">
       <img src="gp/gp.png" />
       <p>An Expert with Caring Heart</p>
     </div>
