@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>An Expert with Caring Heart</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(120deg, #1a1a2e, #16213e);
+        animation: bgMove 10s infinite alternate;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+      }
+
+      @keyframes bgMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          bacground-position: 100% 50%;
+        }
+      }
+      .intro {
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.8s ease;
+      }
+      .intro img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+        }
+        50% {
+          box-shadow: 0 0 50px rgba(255, 255, 255, 1);
+        }
+        100% {
+          box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+        }
+      }
+      .intro p {
+        color: #fff;
+        margin-top: 15px;
+        font-size: 18px;
+        letter-spacing: 1px;
+      }
+      .intro.hide {
+        opacity: 0;
+        transform: scale(0.5);
+        pointer-events: none;
+      }
+
+      .wrapper {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+      }
+      .wrapper.show {
+        display: block;
+      }
+
+      .inner {
+        --w: 100px;
+        --h: 150px;
+        --translateZ: calc((var(--w) + var(--h)) + 0px);
+        --rotateX: -15deg;
+        --perspective: 1000px;
+        position: absolute;
+        width: var(--w);
+        height: var(--h);
+        top: 25%;
+        left: calc(50% - (var(--w) / 2) - 2.5px);
+        z-index: 2;
+        transform-style: preserve-3d;
+        transform: perspective(var(--perspective));
+        animation: rotating 20s linear infinite;
+      }
+      .inner.pause {
+        animation-play-state: paused;
+      }
+
+      @keyframes rotating {
+        from {
+          transform: perspective(var(--perspective)) rotateX(var(--rotateX))
+            rotateY(0);
+        }
+        to {
+          transform: perspective(var(--perspective)) rotateX(var(--rotateX))
+            rotateY(1turn);
+        }
+      }
+
+      .card {
+        position: absolute;
+        border: 2px solid rgba(var(--color-card));
+        border-radius: 12px;
+        overflow: hidden;
+        inset: 0;
+        transform: rotateY(calc((360deg / var(--quantity)) * var(--index)))
+          translateZ(var(--translateZ));
+      }
+
+      .img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: #0000
+          radial-gradient(
+            circle,
+            rgba(var(--color-card), 0.2) 0%,
+            rgba(var(--color-card), 0.6) 80%,
+            rgba(var(--color-card), 0.9) 100%
+          );
+      }
+      .img img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+      }
+      .info {
+        text-align: center;
+        margin-top: 12px;
+        color: #fff;
+        opacity: 0;
+        transition: opacity 0.4s;
+      }
+      .card:hover.info {
+        opacity: 1;
+      }
+      .info h3 {
+        margin: 5px 0;
+        font-size: 16px;
+      }
+      .info p {
+        font-size: 13px;
+        opacity: 0.8;
+      }
+    </style>
+
+    <audio id="bgMusic" loop>
+      <source src="./Swing-Machine-chosic.com_.mp3" />
+    </audio>
+    <div class="intro" id="carousel">
+      <img src="gp/gp.png" />
+      <p>An Expert with Caring Heart</p>
+    </div>
+
+    <div class="wrapper" id="carousel">
+      <div class="inner" id="inner" style="--quantity: 10">
+        <div class="card" style="--index: 0; --color-card: 142, 249, 252">
+          <div class="img">
+            <img src="gp/g1.png" />
+          </div>
+        </div>
+        <div class="card" style="--index: 1; --color-card: 142, 252, 204">
+          <div class="img">
+            <img src="gp/g2.png" />
+          </div>
+        </div>
+        <div class="card" style="--index: 2; --color-card: 142, 252, 157">
+          <div class="img">
+            <img src="gp/g3.png" />
+          </div>
+        </div>
+        <div class="card" style="--index: 3; --color-card: 215, 252, 142">
+          <div class="img">
+            <img src="gp/g4.png" />
+          </div>
+        </div>
+        <div class="card" style="--index: 4; --color-card: 252, 252, 142">
+          <div class="img">
+            <img src="gp/g5.png" />
+          </div>
+        </div>
+        <div class="card" style="--index: 5; --color-card: 252, 208, 142">
+          <div class="img">
+            <img src="gp/g6.png" />
+          </div>
+        </div>
+        <div class="card" style="--index: 6; --color-card: 252, 142, 142">
+          <div class="img">
+            <img src="gp/g7.png" />
+          </div>
+        </div>
+        <div class="card" style="--index: 7; --color-card: 252, 142, 239">
+          <div class="img">
+            <img src="gp/g8.png" />
+          </div>
+        </div>
+        <div class="card" style="--index: 8; --color-card: 204, 142, 252">
+          <div class="img">
+            <img src="gp/g9.png" />
+          </div>
+        </div>
+        <div class="card" style="--index: 9; --color-card: 142, 202, 252">
+          <div class="img">
+            <img src="gp/g10.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const intro = document.getElementById("intro");
+      const carousel = document.getElementById("carousel");
+      const inner = document.getElementById("inner");
+
+      const music = document.getElementById("bgMusic");
+      music.volume = 0.4;
+      music.play();
+      intro.onclick = () => {
+        intro.classList.add("hide");
+        music.volume = 0.4;
+        music.play();
+
+        setTimeout(() => carousel.classList.add("show"), 600);
+      };
+      carousel.onmouseenter = () => inner.classList.add("pause");
+      carousel.onmouseleave = () => inner.classList.remove("pause");
+    </script>
+  </head>
+</html>
