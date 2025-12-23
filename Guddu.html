@@ -154,6 +154,28 @@
       }
     </style>
 
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const intro = document.getElementById("intro");
+        const carousel = document.getElementById("carousel");
+        const inner = document.getElementById("inner");
+        const music = document.getElementById("bgMusic");
+
+        music.volume = 0.4;
+
+        carousel.onclick = () => {
+          carousel.classList.add("hide");
+          music.play(); // allowed now
+
+          setTimeout(() => carousel.classList.add("show"), 600);
+        };
+
+        carousel.onmouseenter = () => inner.classList.add("pause");
+        carousel.onmouseleave = () => inner.classList.remove("pause");
+      });
+    </script>
+  </head>
+  <body>
     <audio id="bgMusic" loop>
       <source src="./Swing-Machine-chosic.com_.mp3" />
     </audio>
@@ -216,23 +238,5 @@
         </div>
       </div>
     </div>
-    <script>
-      const intro = document.getElementById("intro");
-      const carousel = document.getElementById("carousel");
-      const inner = document.getElementById("inner");
-
-      const music = document.getElementById("bgMusic");
-      music.volume = 0.4;
-      music.play();
-      intro.onclick = () => {
-        intro.classList.add("hide");
-        music.volume = 0.4;
-        music.play();
-
-        setTimeout(() => carousel.classList.add("show"), 600);
-      };
-      carousel.onmouseenter = () => inner.classList.add("pause");
-      carousel.onmouseleave = () => inner.classList.remove("pause");
-    </script>
-  </head>
+  </body>
 </html>
