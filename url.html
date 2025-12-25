@@ -21,8 +21,9 @@
         0% {
           background-position: 0% 50%;
         }
+
         100% {
-          bacground-position: 100% 50%;
+          background-position: 100% 50%;
         }
       }
       .intro {
@@ -155,16 +156,26 @@
     </style>
 
     <script>
-      const params = new URLSearchParams(window.location.search);
-      const intro = params.get("intro");
-      const carousel = params.get("carousel");
-
       document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        console.log("hello");
+        console.log(params);
+        console.log(params.get("person"));
+        const person = params.get("person") || "gp";
+
+        if (person === "ammu") {
+          const folderName = "ammu";
+        } else {
+          const folderName = "guddu";
+        }
         const intro = document.getElementById("intro");
         const carousel = document.getElementById("carousel");
         const inner = document.getElementById("inner");
         const music = document.getElementById("bgMusic");
         carousel.style.display = "none";
+        document.querySelectorAll(".person-img").forEach((img) => {
+          img.src = "/" + img.dataset.img;
+        });
 
         music.volume = 0.4;
 
@@ -185,10 +196,9 @@
   </head>
   <body>
     <audio id="bgMusic" loop>
-      <source src="./Swing-Machine-chosic.com_.mp3" />
+      <source src="3_idiots_guitar.mp3" />
     </audio>
     <div class="intro" id="intro">
-      <img src="gp/gp.png" />
       <p>An Expert with Caring Heart</p>
     </div>
 
@@ -196,52 +206,53 @@
       <div class="inner" id="inner" style="--quantity: 10">
         <div class="card" style="--index: 0; --color-card: 142, 249, 252">
           <div class="img">
-            <img src="" />
+            <!-- `${person}/${img.dataset.img}` -->
+            <img class="person-img" data-img= />
           </div>
         </div>
         <div class="card" style="--index: 1; --color-card: 142, 252, 204">
           <div class="img">
-            <img src="" />
+            <img class="person-img" data-img="gp/g1.png" />
           </div>
         </div>
         <div class="card" style="--index: 2; --color-card: 142, 252, 157">
           <div class="img">
-            <img src="gp/g3.png" />
+            <img class="person-img" data-img="gp/g2.png" />
           </div>
         </div>
         <div class="card" style="--index: 3; --color-card: 215, 252, 142">
           <div class="img">
-            <img src="gp/g4.png" />
+            <img class="person-img" data-img="gp/g3.png" />
           </div>
         </div>
         <div class="card" style="--index: 4; --color-card: 252, 252, 142">
           <div class="img">
-            <img src="gp/g5.png" />
+            <img class="person-img" data-img="gp/g4.png" />
           </div>
         </div>
         <div class="card" style="--index: 5; --color-card: 252, 208, 142">
           <div class="img">
-            <img src="gp/g6.png" />
+            <img class="person-img" data-img="gp/g5.png" />
           </div>
         </div>
         <div class="card" style="--index: 6; --color-card: 252, 142, 142">
           <div class="img">
-            <img src="gp/g7.png" />
+            <img class="person-img" data-img="gp/g6.png" />
           </div>
         </div>
         <div class="card" style="--index: 7; --color-card: 252, 142, 239">
           <div class="img">
-            <img src="gp/g8.png" />
+            <img class="person-img" data-img="gp/g7.png" />
           </div>
         </div>
         <div class="card" style="--index: 8; --color-card: 204, 142, 252">
           <div class="img">
-            <img src="gp/g9.png" />
+            <img class="person-img" data-img="gp/g8.png" />
           </div>
         </div>
         <div class="card" style="--index: 9; --color-card: 142, 202, 252">
           <div class="img">
-            <img src="gp/g10.png" />
+            <img class="person-img" data-img="gp/gp9.png" />
           </div>
         </div>
       </div>
