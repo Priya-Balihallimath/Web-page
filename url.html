@@ -155,6 +155,10 @@
     </style>
 
     <script>
+      const params = new URLSearchParams(window.location.search);
+      const intro = params.get("intro");
+      const carousel = params.get("carousel");
+
       document.addEventListener("DOMContentLoaded", () => {
         const intro = document.getElementById("intro");
         const carousel = document.getElementById("carousel");
@@ -181,7 +185,7 @@
   </head>
   <body>
     <audio id="bgMusic" loop>
-      <source src="3_idiots_guitar.mp3" />
+      <source src="./Swing-Machine-chosic.com_.mp3" />
     </audio>
     <div class="intro" id="intro">
       <img src="gp/gp.png" />
@@ -192,12 +196,12 @@
       <div class="inner" id="inner" style="--quantity: 10">
         <div class="card" style="--index: 0; --color-card: 142, 249, 252">
           <div class="img">
-            <img src="gp/g1.png" />
+            <img src="" />
           </div>
         </div>
         <div class="card" style="--index: 1; --color-card: 142, 252, 204">
           <div class="img">
-            <img src="gp/g2.png" />
+            <img src="" />
           </div>
         </div>
         <div class="card" style="--index: 2; --color-card: 142, 252, 157">
