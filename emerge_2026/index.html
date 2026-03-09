@@ -340,6 +340,28 @@
         transform: rotateY(0deg);
       }
 
+      @media (max-width: 600px) {
+        .poster-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .poster-slice {
+          height: 320px;
+        }
+
+        .poster-slice:nth-child(1) {
+          background-position: 0% center;
+        }
+
+        .poster-slice:nth-child(2) {
+          background-position: 100% center;
+        }
+        .poster-slice {
+          aspect-ratio: 1/1.5;
+          background-size: cover;
+        }
+      }
+
       @keyframes unfold {
         0% {
           transform: rotateY(90deg);
