@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Question</title>
+    <style>
+      body {
+        font-family: Arial;
+        text-align: center;
+        background: black;
+        color: white;
+      }
+      button {
+        display: block;
+        margin: 10px auto;
+        padding: 10px;
+        width: 220px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2 id="question">Loading...</h2>
+
+    <button onclick="check(this)" id="opt0"></button>
+    <button onclick="check(this)" id="opt1"></button>
+    <button onclick="check(this)" id="opt2"></button>
+    <button onclick="check(this)" id="opt3"></button>
+
+    <script>
+      const csvUrl =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQCugogQCrAGkt-7zHuGEm_ll8oeTToALiQ0voOe5zeghtVIjH7diwt1VZB-puGj7DY7b2rqyMKvQAI/pub?output=csv";
+
+      const params = new URLSearchParams(window.location.search);
+      const stage = params.get("stage") || localStorage.getItem("stage");
+      const team = localStorage.getItem("teamName");
+
+      let correctAnswer = "";
+
+      async function loadQuestion() {
+        try {
+          const res = await fetch(csvUrl);
+          const data = await res.text();
+
+          const rows = data
+            .trim()
+            .split("\n")
+            .map((r) => r.split(",").map((c) => c.trim()));
+
+          let found = false;
+
+          for (let i = 1; i < rows.length; i++) {
+            let sheetTeam = rows[i][0];
+            let sheetStage = rows[i][1];
+
+            if (
+              sheetTeam &&
+              team &&
+              sheetTeam.toLowerCase().trim() === team.toLowerCase().trim() &&
+              sheetStage.trim() === stage.toString().trim()
+            ) {
+              document.getElementById("question").innerText = rows[i][3];
+
+              let options = [rows[i][4], rows[i][5], rows[i][6], rows[i][7]];
+
+              correctAnswer = rows[i][4];
+
+              options.forEach((opt, i) => {
+                document.getElementById("opt" + i).innerText = opt || "N/A";
+              });
+
+              found = true;
+              break;
+            }
+          }
+          console.log("TEAM:", team);
+          console.log("STAGE:", stage);
+          if (!found) {
+            document.getElementById("question").innerText =
+              "❌ Question not found!";
+          }
+        } catch (err) {
+          console.error(err);
+          document.getElementById("question").innerText =
+            "⚠ Error loading question";
+        }
+      }
+
+      function check(btn) {
+        if (btn.innerText === correctAnswer) {
+          alert("✅ Correct!");
+
+          let next = parseInt(stage) + 1;
+          localStorage.setItem("stage", next);
+
+          window.location.href = "index.html";
+        } else {
+          alert("❌ Wrong answer!");
+        }
+      }
+
+      loadQuestion();
+    </script>
+  </body>
+</html>

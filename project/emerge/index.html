@@ -10,10 +10,9 @@
         color: whitesmoke;
         overflow: hidden;
       }
+
       .background {
         position: fixed;
-        top: 0;
-        left: 0;
         width: 100%;
         height: 100%;
         background: url("jit.jpeg") center/cover no-repeat;
@@ -22,8 +21,6 @@
 
       .overlay {
         position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.65);
@@ -49,39 +46,42 @@
       input {
         padding: 12px;
         font-size: 16px;
-        border: none;
         border-radius: 5px;
-        margin-top: 20px;
+        margin-top: 15px;
+        border: none;
       }
 
       button {
         padding: 12px 25px;
-        font-size: 16px;
-        margin-top: 20px;
-        border: none;
+        margin-top: 15px;
         border-radius: 6px;
+        border: none;
         background: #ff3c3c;
         color: white;
         cursor: pointer;
-        transition: 0.3s;
       }
+
       button:hover {
         transform: scale(1.1);
-        background: #ff0000;
       }
+
       #instruction {
         display: none;
-        margin-top: 25px;
+        margin-top: 20px;
         font-size: 20px;
-        animation: fadeIn 2s ease;
+      }
+
+      #password,
+      #verifyBtn {
+        display: none;
       }
 
       @keyframes titleReveal {
-        0% {
+        from {
           opacity: 0;
           transform: scale(0.6);
         }
-        100% {
+        to {
           opacity: 1;
           transform: scale(1);
         }
@@ -97,36 +97,34 @@
           transform: translateY(0);
         }
       }
-      @keyframes zoomBg {
-        from {
-          transform: scale(1);
-        }
-        to {
-          transform: scale(1.1);
-        }
-      }
     </style>
   </head>
+
   <body>
     <div class="background"></div>
+
+    <!-- Intro -->
     <div class="overlay" id="intro">
       <h1 class="title">QR Hunt</h1>
       <p>Tech Fest Challenge</p>
     </div>
 
+    <!-- Main Screen -->
     <div class="overlay" id="welcome">
-      <h2>
-        Welcome to <br />
-        JAIN INSTITUTION OF TECHNOLOGY
-      </h2>
+      <h2>Welcome to <br />JAIN INSTITUTION OF TECHNOLOGY</h2>
       <h2>EMERGE</h2>
       <h3>QR HUNT</h3>
       <p>Scan • Solve • Win</p>
+
       <input type="text" id="teamName" placeholder="Enter your team name" />
       <button onclick="startGame()">Start Hunt</button>
-      <p id="instruction" style="display: none">
-        Go to the <b>Main Gate </b>and scan the QR code to begin the hunt.
+
+      <p id="instruction">
+        Go to the <b>Main Gate</b> and enter the password found there.
       </p>
+
+      <input type="password" id="password" placeholder="Enter password" />
+      <button id="verifyBtn" onclick="verifyPassword()">Verify</button>
     </div>
 
     <script>
@@ -134,18 +132,73 @@
         document.getElementById("intro").style.display = "none";
         document.getElementById("welcome").style.display = "flex";
       }, 4000);
+
+      const csvUrl =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQCugogQCrAGkt-7zHuGEm_ll8oeTToALiQ0voOe5zeghtVIjH7diwt1VZB-puGj7DY7b2rqyMKvQAI/pub?output=csv";
+
+      // STEP 1: Start Game (only team name)
       function startGame() {
-        let team = document.getElementById("teamName").value;
-        if (team == "") {
+        let team = document.getElementById("teamName").value.trim();
+
+        if (team === "") {
           alert("Please enter a team name");
           return;
         }
+
         localStorage.setItem("teamName", team);
+
         document.getElementById("instruction").style.display = "block";
-        setTimeout(function () {
-          window.location.href =
-            "scanner.html?team=" + encodeURIComponent(team);
-        }, 3000);
+        document.getElementById("password").style.display = "block";
+        document.getElementById("verifyBtn").style.display = "block";
+      }
+
+      // STEP 2: Verify Password
+      async function verifyPassword() {
+        let team = localStorage.getItem("teamName");
+        let password = document.getElementById("password").value.trim();
+
+        if (password === "") {
+          alert("Enter password");
+          return;
+        }
+
+        try {
+          const response = await fetch(csvUrl);
+          const data = await response.text();
+
+          const rows = data
+            .trim()
+            .split("\n")
+            .map((row) => row.split(",").map((cell) => cell.trim()));
+
+          let valid = false;
+
+          for (let i = 1; i < rows.length; i++) {
+            if (!rows[i][0]) continue;
+
+            let sheetTeam = rows[i][0];
+            let sheetStage = rows[i][1];
+            let sheetPassword = rows[i][2];
+
+            if (
+              sheetTeam.toLowerCase().trim() === team.toLowerCase().trim() &&
+              sheetPassword.trim() === password
+            ) {
+              valid = true;
+              break;
+            }
+          }
+
+          if (valid) {
+            window.location.href =
+              "scanner.html?team=" + encodeURIComponent(team);
+          } else {
+            alert("Wrong password. Try again!");
+          }
+        } catch (error) {
+          console.error(error);
+          alert("Error connecting to server");
+        }
       }
     </script>
   </body>
