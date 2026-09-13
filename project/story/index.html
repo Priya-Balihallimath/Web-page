@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>King of the World 🌎</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <section id="opening" class="scene active">
+      <div class="stars"></div>
+
+      <div class="opening-content">
+        <p class="small-text">A STORY OF TWO LIVES</p>
+
+        <h1>King of the World 🌎</h1>
+
+        <p class="subtitle">
+          Everyone wants the world...
+          <br />
+          He only wanted his own life.
+        </p>
+
+        <button id="startButton">✦ BEGIN THEIR STORY ✦</button>
+      </div>
+    </section>
+
+    <section id="names" class="scene">
+      <div class="name-content">
+        <h2>Before the story begins...</h2>
+
+        <p>Every story has two names.</p>
+
+        <div class="input-group">
+          <label for="boyName"> The Boy </label>
+
+          <input
+            type="text"
+            id="boyName"
+            placeholder="Enter his name"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="input-group">
+          <label for="girlName"> The Girl </label>
+
+          <input
+            type="text"
+            id="girlName"
+            placeholder="Enter her name"
+            autocomplete="off"
+          />
+        </div>
+
+        <button id="continueButton">✦ ENTER THE STORY ✦</button>
+
+        <p id="errorMessage"></p>
+      </div>
+    </section>
+
+    <section id="hill" class="scene">
+      <div class="sky"></div>
+
+      <div class="moon"></div>
+
+      <div class="cloud cloud-one"></div>
+      <div class="cloud cloud-two"></div>
+
+      <div class="city">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="hill-shape"></div>
+
+      <div class="boy">
+        <div class="boy-head"></div>
+
+        <div class="boy-body"></div>
+      </div>
+
+      <div class="story-text">
+        <p id="narration"></p>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
